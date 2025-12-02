@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minecraft Crafter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Minecraft Crafter</h1>
+      <div class="actions">
+        <input id="fileInput" type="file" accept=".txt" style="display:none" />
+        <button id="importBtn">Завантажити .txt</button>
+        <button id="exportBtn">Зберегти .txt</button>
+        <button id="clearBtn" title="Очистити все">Очистити</button>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="library">Бібліотека</div>
+      <div class="tab" data-tab="add">Додавання крафту</div>
+      <div class="tab" data-tab="crafts">Список крафтів</div>
+      <div class="tab" data-tab="calc">Розрахунок</div>
+    </div>
+
+    <main class="card">
+      <div id="library" class="pane">
+        <div class="grid">
+          <div>
+            <h3>Предмети</h3>
+            <div class="row">
+              <input id="newItemName" placeholder="Назва предмета" />
+              <button id="addItemBtn">Додати</button>
+            </div>
+            <div class="list" id="itemsList"></div>
+
+            <h3 style="margin-top:12px">Рідині</h3>
+            <div class="row">
+              <input id="newFluidName" placeholder="Назва рідини" />
+              <input id="newFluidAmount" type="number" placeholder="кількість (необов’язково)" style="width:120px" />
+              <button id="addFluidBtn">Додати</button>
+            </div>
+            <div class="list" id="fluidsList"></div>
+          </div>
+
+          <div>
+            <h3>Інформація та імпорт/експорт</h3>
+            
+            <h4>Імпорт/Експорт формату .txt</h4>
+
+            <div style="margin-top:12px" class="code" id="jsonPreview"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="add" class="pane" style="display:none">
+        <div class="grid">
+          <div>
+            <h3>Додавання крафту</h3>
+            <label>Тип механізму</label>
+            <select id="machineSelect"></select>
+
+            <label>Назва підсумкового предмета</label>
+            <input id="resultName" list="itemsDatalist" placeholder="Назва результату" />
+
+            <label>Кількість результату</label>
+            <input id="resultCount" type="number" value="1" min="1" />
+
+            <h4 style="margin-top:8px">Інгредієнти</h4>
+            <div id="ingredientsContainer"></div>
+
+            <div style="margin-top:8px" class="flex">
+              <button id="addIngredientBtn">+ Додати інгредієнт</button>
+              <button id="saveCraftBtn" class="success">Зберегти крафт</button>
+            </div>
+          </div>
+
+          <div>
+            <h3>Підтвердження перед збереженням</h3>
+            <div id="previewCraft" class="code">Поки немає крафту для передперегляду</div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div id="crafts" class="pane" style="display:none">
+        <h3>Збережені крафти</h3>
+        <div id="craftsList" class="list"></div>
+      </div>
+
+      <div id="calc" class="pane" style="display:none">
+        <h3>Розрахунок необхідних ресурсів</h3>
+        <label>Обери підсумковий предмет</label>
+        <input id="calcItem" list="itemsDatalist" placeholder="Назва предмета" />
+        <label>Кількість</label>
+        <input id="calcCount" type="number" value="1" min="1" />
+        <div style="margin-top:8px" class="flex">
+          <button id="calcBtn">Показати необхідні предмети</button>
+          <button id="flattenBtn">Показати з розгортанням проміжних крафтів</button>
+        </div>
+        <div id="calcResult" class="list" style="margin-top:8px"></div>
+      </div>
+    </main>
+
+
+  </div>
+
+  <datalist id="itemsDatalist"></datalist>
+
+  <!-- toast -->
+  <div id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
